@@ -27,11 +27,6 @@
       "description": "ビジネス向けの図・イラスト（概念図、フロー図、アイソメトリック図、アイキャッチ、資料用ビジュアルなど）を画像生成AIで作成するための英語プロンプトを生成するスキル"
     },
     {
-      "name": "note-article-writer",
-      "source": "./plugins/note-article-writer",
-      "description": "株式会社分析屋のブログ記事（note）の原稿を執筆するスキル"
-    },
-    {
       "name": "requirements-definition",
       "source": "./plugins/requirements-definition",
       "description": "ユーザの要望をヒアリングしながら要件定義を行い、システム要件定義書を作成するスキル"

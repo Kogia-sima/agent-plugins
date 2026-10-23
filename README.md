@@ -57,7 +57,6 @@ enabled = true
 | [`document-review`](./plugins/document-review/) | Word・PDF・PowerPoint・Excel・Markdown など任意形式のドキュメントを、誤字脱字から目的適合性・全体構成まで多層的にレビューし、優先度順の推奨事項をまとめた Markdown レポートを作成するスキル |
 | [`idea-sparring`](./plugins/idea-sparring/) | ユーザの背景情報とやりたいことのざっくりとした概要を入力として受け取り、ヒアリングを通じて本当の課題を特定したうえで、効果的な解決策を提案する壁打ちスキル |
 | [`image-prompt-generator`](./plugins/image-prompt-generator/) | ビジネス向けの図・イラスト（概念図、フロー図、アイソメトリック図、アイキャッチ、資料用ビジュアルなど）を画像生成AIで作成するための英語プロンプトを生成するスキル |
-| [`note-article-writer`](./plugins/note-article-writer/) | 株式会社分析屋のブログ記事（note）の原稿を執筆するスキル |
 | [`requirements-definition`](./plugins/requirements-definition/) | ユーザの要望をヒアリングしながら要件定義を行い、システム要件定義書を作成するスキル |
 | [`task-designer`](./plugins/task-designer/) | ユーザの実現したいこと(ゴール)を、実行可能なレベルのタスク一覧(チェックリスト形式)に分解するスキル |
 | [`tech-article-review`](./plugins/tech-article-review/) | ユーザーが書いた技術記事をレビューするスキル |

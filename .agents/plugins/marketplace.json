@@ -53,18 +53,6 @@
       "category": "Productivity"
     },
     {
-      "name": "note-article-writer",
-      "source": {
-        "source": "local",
-        "path": "./plugins/note-article-writer"
-      },
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Productivity"
-    },
-    {
       "name": "requirements-definition",
       "source": {
         "source": "local",
