@@ -25,6 +25,7 @@ Skill 本体（`skills/<skill-name>/SKILL.md`）は両 CLI で共通の形式な
 │       │   └── plugin.json      # Claude Code 用マニフェスト（正本。name は marketplace.json と一致させる）
 │       ├── .codex-plugin/
 │       │   └── plugin.json      # Codex CLI 用マニフェスト（スクリプトで生成）
+│       ├── hooks/               # フック定義（hooks.json）と実行スクリプト（両 CLI 共通、任意）
 │       └── skills/<skill-name>/SKILL.md
 ├── scripts/                     # 開発用スクリプト
 │   ├── convert_skills_to_plugins.py  # Skill アーカイブ（.skills/*.skill）をプラグインに変換

@@ -27,6 +27,8 @@ AIエージェント（Claude Code など）で、自然言語でコミットを
 ## 注意点
 
 * **Skill の経由必須**: コミット時は必ず本 Skill を経由してください。Skill を通さない直接のコミットは、メッセージ規約から外れる可能性があります。
+* **スキル未読み込み時のブロック**: 本プラグインには PreToolUse フック（[`hooks/hooks.json`](../../hooks/hooks.json)）が同梱されています。セッション内で本 Skill を読み込まないまま AIエージェントが `git commit` を実行しようとすると、実行が拒否され、先に Skill を読み込むよう促されます。Claude Code と Codex CLI の両方で動作します。
+* **Codex CLI でのフックの承認**: Codex CLI では、プラグインに同梱されたフックはレビュー（承認）するまで実行されません。インストール後に `/hooks` を開き、本プラグインのフックを承認してください。
 * **ステージ内容の確認**: 意図しない変更が `git add` でステージされないよう、コミット前に変更内容を確認してください。
 * **pre-commit との併用**: AIエージェントは完璧ではありません。[conventional-pre-commit](https://github.com/compilerla/conventional-pre-commit) などの commit フックと併用することを推奨します。
 

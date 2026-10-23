@@ -1,6 +1,6 @@
 {
   "name": "commit",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "ALWAYS use this skill when committing code changes — never commit directly without it. Creates commits following proper conventional commit format and issue references. Trigger on any commit, git commit, save changes, or commit message task.",
   "author": {
     "name": "Ryohei Machida",
