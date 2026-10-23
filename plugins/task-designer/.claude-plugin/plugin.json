@@ -1,0 +1,9 @@
+{
+  "name": "task-designer",
+  "description": "ユーザの実現したいこと(ゴール)を、実行可能なレベルのタスク一覧(チェックリスト形式)に分解するスキル",
+  "version": "0.1.0",
+  "author": {
+    "name": "Ryohei Machida",
+    "email": "r-machida@analytics-jp.com"
+  }
+}

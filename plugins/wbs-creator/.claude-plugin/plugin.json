@@ -1,0 +1,9 @@
+{
+  "name": "wbs-creator",
+  "description": "プロジェクトのゴールを入力すると、WBS（作業分解構造）を表形式で生成するスキル",
+  "version": "0.1.0",
+  "author": {
+    "name": "Ryohei Machida",
+    "email": "r-machida@analytics-jp.com"
+  }
+}

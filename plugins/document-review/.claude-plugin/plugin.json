@@ -1,0 +1,9 @@
+{
+  "name": "document-review",
+  "description": "Word・PDF・PowerPoint・Excel・Markdown など任意形式のドキュメントを、誤字脱字から目的適合性・全体構成まで多層的にレビューし、優先度順の推奨事項をまとめた Markdown レポートを作成するスキル",
+  "version": "0.1.0",
+  "author": {
+    "name": "Ryohei Machida",
+    "email": "r-machida@analytics-jp.com"
+  }
+}

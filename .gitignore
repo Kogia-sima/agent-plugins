@@ -222,3 +222,6 @@ __marimo__/
 # Claude Code
 settings.local.json
 .mcp.local.json
+
+# Raw Skills
+/.skills/

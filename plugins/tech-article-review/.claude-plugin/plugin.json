@@ -1,0 +1,9 @@
+{
+  "name": "tech-article-review",
+  "description": "ユーザーが書いた技術記事をレビューするスキル",
+  "version": "0.1.0",
+  "author": {
+    "name": "Ryohei Machida",
+    "email": "r-machida@analytics-jp.com"
+  }
+}

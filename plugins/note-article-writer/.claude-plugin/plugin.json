@@ -1,0 +1,9 @@
+{
+  "name": "note-article-writer",
+  "description": "株式会社分析屋のブログ記事（note）の原稿を執筆するスキル",
+  "version": "0.1.0",
+  "author": {
+    "name": "Ryohei Machida",
+    "email": "r-machida@analytics-jp.com"
+  }
+}
