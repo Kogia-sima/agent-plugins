@@ -1,6 +1,6 @@
 {
   "name": "agent-plugins",
-  "description": "個人用の Claude Code プラグイン集",
+  "description": "個人用の Claude Code / Codex CLI プラグイン集",
   "owner": {
     "name": "Ryohei Machida",
     "email": "r-machida@analytics-jp.com"

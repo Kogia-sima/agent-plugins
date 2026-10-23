@@ -1,0 +1,16 @@
+{
+  "name": "idea-sparring",
+  "version": "0.1.0",
+  "description": "ユーザの背景情報とやりたいことのざっくりとした概要を入力として受け取り、ヒアリングを通じて本当の課題を特定したうえで、効果的な解決策を提案する壁打ちスキル",
+  "author": {
+    "name": "Ryohei Machida",
+    "email": "r-machida@analytics-jp.com"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "idea-sparring",
+    "shortDescription": "ユーザの背景情報とやりたいことのざっくりとした概要を入力として受け取り、ヒアリングを通じて本当の課題を特定したうえで、効果的な解決策を提案する壁打ちスキル",
+    "category": "Productivity",
+    "developerName": "Ryohei Machida"
+  }
+}

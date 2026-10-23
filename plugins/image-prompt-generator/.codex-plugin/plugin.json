@@ -1,0 +1,16 @@
+{
+  "name": "image-prompt-generator",
+  "version": "0.1.0",
+  "description": "ビジネス向けの図・イラスト（概念図、フロー図、アイソメトリック図、アイキャッチ、資料用ビジュアルなど）を画像生成AIで作成するための英語プロンプトを生成するスキル",
+  "author": {
+    "name": "Ryohei Machida",
+    "email": "r-machida@analytics-jp.com"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "image-prompt-generator",
+    "shortDescription": "ビジネス向けの図・イラスト（概念図、フロー図、アイソメトリック図、アイキャッチ、資料用ビジュアルなど）を画像生成AIで作成するための英語プロンプトを生成するスキル",
+    "category": "Productivity",
+    "developerName": "Ryohei Machida"
+  }
+}

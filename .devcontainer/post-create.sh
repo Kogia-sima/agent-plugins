@@ -9,6 +9,10 @@ pip install --user --upgrade pip
 # Ruff (Pythonの静的解析ツール) をインストール
 pip install --user ruff
 
+# Codex CLI (OpenAI のコーディングエージェント) をインストール
+# 設定ディレクトリ (~/.codex) は devcontainer.json の mounts でホストと共有している
+npm install -g @openai/codex
+
 if [ -f ".pre-commit-config.yaml" ]; then
     # 既存のフックスクリプトが残っていると権限エラーになるため、事前に削除しておく
     rm -f .git/hooks/*

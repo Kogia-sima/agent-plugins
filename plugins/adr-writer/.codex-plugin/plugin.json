@@ -1,0 +1,16 @@
+{
+  "name": "adr-writer",
+  "version": "0.1.0",
+  "description": "ユーザのメモ書きや箇条書きから、ADR（Architectural Decision Records）の新規レコードをMarkdownファイルとして作成するスキル",
+  "author": {
+    "name": "Ryohei Machida",
+    "email": "r-machida@analytics-jp.com"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "adr-writer",
+    "shortDescription": "ユーザのメモ書きや箇条書きから、ADR（Architectural Decision Records）の新規レコードをMarkdownファイルとして作成するスキル",
+    "category": "Productivity",
+    "developerName": "Ryohei Machida"
+  }
+}

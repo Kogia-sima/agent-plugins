@@ -1,10 +1,12 @@
 # agent-plugins
 
-個人用の Claude Code プラグインマーケットプレイスです。
+個人用のプラグインマーケットプレイスです。**Claude Code** と **Codex CLI** のどちらからでもインストールできます。
 
 ## 導入方法
 
-マーケットプレイスを登録してから、プラグインを名前で指定してインストールします。
+どちらの CLI でも、マーケットプレイスを登録してからプラグインを `<プラグイン名>@agent-plugins` の形で指定してインストールします。
+
+### Claude Code
 
 ```bash
 # ローカルのクローンを登録する場合
@@ -18,6 +20,34 @@ claude plugin install <プラグイン名>@agent-plugins
 ```
 
 セッション内では `/plugin marketplace add` と `/plugin install` でも同じ操作ができます。
+
+### Codex CLI
+
+```bash
+# ローカルのクローンを登録する場合
+codex plugin marketplace add ./agent-plugins
+
+# GitHub リポジトリから登録する場合
+codex plugin marketplace add Kogia-sima/agent-plugins
+
+# 登録済みのプラグインを確認
+codex plugin list --marketplace agent-plugins
+
+# プラグインをインストール
+codex plugin add <プラグイン名>@agent-plugins
+
+# マーケットプレイスを最新の状態に更新
+codex plugin marketplace upgrade agent-plugins
+```
+
+`codex` を起動してから `/plugins` を入力すると、プラグインブラウザからもインストールや有効・無効の切り替えができます。インストールしたプラグインの Skill は、新しく開始したセッションで使えるようになります。
+
+特定のプロジェクトだけで有効・無効を切り替えたい場合は、そのプロジェクトの `.codex/config.toml` に設定します。
+
+```toml
+[plugins."<プラグイン名>@agent-plugins"]
+enabled = true
+```
 
 ## プラグイン一覧
 

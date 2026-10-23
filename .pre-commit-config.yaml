@@ -70,9 +70,20 @@ repos:
         args: []
 
 # --- ローカル定義のカスタムフック ---
-# コミットメッセージに日本語が含まれているかをチェックする。
+# * Codex CLI 用マニフェストが Claude Code 用マニフェストと同期しているかをチェックする。
+# * コミットメッセージに日本語が含まれているかをチェックする。
 -   repo: local
     hooks:
+    -   id: check-codex-plugins
+        name: Check Codex plugin manifests are in sync
+        # 標準ライブラリのみで動くため、pre-commit が用意する Python 環境で実行する
+        # （CI のランナーには uv が無いため uv run は使わない）
+        entry: python scripts/sync_codex_plugins.py --check
+        language: python
+        # マニフェストまたは同期スクリプトが変更されたときのみ実行する
+        files: ^(\.claude-plugin/|plugins/[^/]+/\.(claude|codex)-plugin/|\.agents/plugins/|scripts/sync_codex_plugins\.py$)
+        # 個々のファイルではなく、リポジトリ全体をまとめて検査する
+        pass_filenames: false
     -   id: check-japanese-commit
         name: Check Japanese commit message
         entry: uv run python scripts/japanese_commit_message.py

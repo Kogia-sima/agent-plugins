@@ -1,0 +1,16 @@
+{
+  "name": "requirements-definition",
+  "version": "0.1.0",
+  "description": "ユーザの要望をヒアリングしながら要件定義を行い、システム要件定義書を作成するスキル",
+  "author": {
+    "name": "Ryohei Machida",
+    "email": "r-machida@analytics-jp.com"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "requirements-definition",
+    "shortDescription": "ユーザの要望をヒアリングしながら要件定義を行い、システム要件定義書を作成するスキル",
+    "category": "Productivity",
+    "developerName": "Ryohei Machida"
+  }
+}

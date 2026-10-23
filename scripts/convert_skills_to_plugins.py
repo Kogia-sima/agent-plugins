@@ -8,7 +8,9 @@
     │   └── plugin.json          # プラグインのマニフェスト
     └── skills/<skill-name>/     # アーカイブの中身（SKILL.md や references/ など）
 
-あわせて `.claude-plugin/marketplace.json` にプラグインのエントリを追加する。
+あわせて `.claude-plugin/marketplace.json` にプラグインのエントリを追加し、
+`sync_codex_plugins.py` を呼び出して Codex CLI 用のマニフェスト
+（`.codex-plugin/plugin.json` と `.agents/plugins/marketplace.json`）も生成する。
 次のいずれかに当てはまる Skill は「プラグイン化済み」とみなしてスキップする。
 
 * `plugins/<skill-name>/` ディレクトリが既に存在する
@@ -27,6 +29,9 @@ import sys
 import zipfile
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
+
+# Codex CLI 用マニフェストの生成処理（同じ scripts/ ディレクトリのスクリプト）
+from sync_codex_plugins import sync as sync_codex_plugins
 
 # リポジトリのルートディレクトリ（このスクリプトの 1 つ上の階層）
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -272,6 +277,9 @@ def main() -> int:
 
     if converted and not dry_run:
         write_json(marketplace_path, marketplace)
+        # Claude Code 側の変更を Codex CLI 用マニフェストにも反映する
+        for path in sync_codex_plugins():
+            print(f"[CODEX] {path.relative_to(REPO_ROOT)}")
 
     print(
         f"\n変換: {len(converted)} 件 / スキップ: {len(skipped)} 件 / 失敗: {len(failed)} 件"
