@@ -106,7 +106,9 @@ def load_skill_archive(path: Path) -> SkillArchive:
         # トップレベルのディレクトリがちょうど 1 つであることを確認する
         roots = {PurePosixPath(entry).parts[0] for entry in names}
         if len(roots) != 1:
-            raise ValueError(f"トップレベルのディレクトリが 1 つではありません: {sorted(roots)}")
+            raise ValueError(
+                f"トップレベルのディレクトリが 1 つではありません: {sorted(roots)}"
+            )
         root = roots.pop()
 
         skill_md = f"{root}/SKILL.md"
@@ -154,16 +156,22 @@ def extract_skill(archive: SkillArchive, dest_dir: Path) -> None:
             # zip の external_attr 上位 16 ビットに Unix のパーミッションが入っている
             mode = info.external_attr >> 16
             if mode & stat.S_IXUSR:
-                target.chmod(target.stat().st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+                target.chmod(
+                    target.stat().st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH
+                )
 
 
 def write_json(path: Path, data: object) -> None:
     """JSON を 2 スペースインデント・日本語そのまま・末尾改行ありで書き出す。"""
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    path.write_text(
+        json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
 
 
-def find_marketplace_entry(marketplace: dict[str, object], name: str) -> dict[str, object] | None:
+def find_marketplace_entry(
+    marketplace: dict[str, object], name: str
+) -> dict[str, object] | None:
     """marketplace.json の plugins から、指定した名前のエントリを探す。"""
     plugins = marketplace.get("plugins", [])
     assert isinstance(plugins, list)
@@ -174,7 +182,9 @@ def find_marketplace_entry(marketplace: dict[str, object], name: str) -> dict[st
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="`.skills/` の Skill アーカイブをプラグインに変換する")
+    parser = argparse.ArgumentParser(
+        description="`.skills/` の Skill アーカイブをプラグインに変換する"
+    )
     parser.add_argument(
         "--skills-dir",
         type=Path,
@@ -263,7 +273,9 @@ def main() -> int:
     if converted and not dry_run:
         write_json(marketplace_path, marketplace)
 
-    print(f"\n変換: {len(converted)} 件 / スキップ: {len(skipped)} 件 / 失敗: {len(failed)} 件")
+    print(
+        f"\n変換: {len(converted)} 件 / スキップ: {len(skipped)} 件 / 失敗: {len(failed)} 件"
+    )
     if converted and not dry_run:
         print("`claude plugin validate .` で検証してください。")
     return 1 if failed else 0

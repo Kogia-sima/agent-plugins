@@ -5,7 +5,6 @@
 import re
 import sys
 
-
 # ひらがな・カタカナ・漢字のいずれかにマッチする正規表現パターン
 JAPANESE_PATTERN = re.compile(r"[\u3040-\u9FFF\uF900-\uFAFF]")
 
