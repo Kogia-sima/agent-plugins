@@ -32,3 +32,4 @@ claude plugin install <プラグイン名>@agent-plugins
 | [`task-designer`](./plugins/task-designer/) | ユーザの実現したいこと(ゴール)を、実行可能なレベルのタスク一覧(チェックリスト形式)に分解するスキル |
 | [`tech-article-review`](./plugins/tech-article-review/) | ユーザーが書いた技術記事をレビューするスキル |
 | [`wbs-creator`](./plugins/wbs-creator/) | プロジェクトのゴールを入力すると、WBS（作業分解構造）を表形式で生成するスキル |
+| [`commit`](./plugins/commit/) | Conventional Commits 形式に沿ったコミットを作成するスキル |

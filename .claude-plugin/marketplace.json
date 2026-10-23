@@ -50,6 +50,11 @@
       "name": "wbs-creator",
       "source": "./plugins/wbs-creator",
       "description": "プロジェクトのゴールを入力すると、WBS（作業分解構造）を表形式で生成するスキル"
+    },
+    {
+      "name": "commit",
+      "source": "./plugins/commit",
+      "description": "ALWAYS use this skill when committing code changes — never commit directly without it. Creates commits following proper conventional commit format and issue references. Trigger on any commit, git commit, save changes, or commit message task."
     }
   ]
 }
