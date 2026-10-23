@@ -1,0 +1,72 @@
+# ghalint と zizmor を使って GitHub Actions の静的解析を実施するワークフロー
+#
+# - ghalint: https://github.com/suzuki-shunsuke/ghalint
+# - zizmor: https://github.com/zizmorcore/zizmor
+
+name: GitHub Actions Lint
+
+# .github/workflows/ ディレクトリ内のyamlファイルが変更されたときに実行されるように設定
+on:
+  pull_request:
+    paths:
+      - .github/workflows/*.yaml
+      - .github/workflows/*.yml
+
+# 最小権限原則。リポジトリへの書き込みを禁止する。
+permissions:
+  contents: read
+  actions: read
+
+# 環境変数の設定
+env:
+  # NOTE: ghalint をアップデートする場合は、 GHALINT_VERSION, GHALINT_CHECKSUM を更新してください
+  GHALINT_OS: linux
+  GHALINT_ARCH: amd64
+  GHALINT_VERSION: 1.5.6
+  GHALINT_CHECKSUM: 98ee0e3330de7286f470d1e89c03ff7ce70d7a5998ba0f15969c400447be579c
+
+  # NOTE: zizmor をアップデートする場合は、 ZIZMOR_VERSION, ZIZMOR_CHECKSUM を更新してください
+  ZIZMOR_VERSION: 1.25.2
+  ZIZMOR_CHECKSUM: aa1facd105f0d83fe5c55b1adcd9d7417de5d83aa27471f91dc0b66cf3803577
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Download ghalint
+        run: |
+          curl -L -o ghalint.tar.gz "https://github.com/suzuki-shunsuke/ghalint/releases/download/v${GHALINT_VERSION}/ghalint_${GHALINT_VERSION}_${GHALINT_OS}_${GHALINT_ARCH}.tar.gz"
+          if [ "$(shasum -a 256 ghalint.tar.gz)" != "${GHALINT_CHECKSUM}  ghalint.tar.gz" ]; then
+            echo "checksum mismatch"
+            echo "expected: ${GHALINT_CHECKSUM}  ghalint.tar.gz"
+            echo "actual: $(shasum -a 256 ghalint.tar.gz)"
+            exit 1
+          fi
+          tar xzf ghalint.tar.gz
+          ./ghalint version
+
+      - name: Run ghalint
+        run: ./ghalint run
+
+      - name: Download zizmor
+        run: |
+          curl -L -o zizmor.tar.gz "https://github.com/zizmorcore/zizmor/releases/download/v${ZIZMOR_VERSION}/zizmor-x86_64-unknown-linux-gnu.tar.gz"
+          if [ "$(shasum -a 256 zizmor.tar.gz)" != "${ZIZMOR_CHECKSUM}  zizmor.tar.gz" ]; then
+            echo "checksum mismatch"
+            echo "expected: ${ZIZMOR_CHECKSUM}  zizmor.tar.gz"
+            echo "actual: $(shasum -a 256 zizmor.tar.gz)"
+            exit 1
+          fi
+          tar xzf zizmor.tar.gz
+          ./zizmor --version
+
+      - name: Run zizmor 🌈
+        run: ./zizmor .
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

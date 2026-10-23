@@ -1,0 +1,22 @@
+# Dependabot 設定ファイル
+# 依存関係の更新を自動でチェックし、Pull Request を作成してくれる GitHub の機能。
+# 公式ドキュメント: https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+# 設定ファイルの最新フォーマットに準拠。
+version: 2
+
+updates:
+  # ── pre-commit ───────────────────────────────────────────────
+  # .pre-commit-config.yaml に記載した各フックの rev（バージョン）更新を監視する。
+  - package-ecosystem: "pre-commit"
+    # .pre-commit-config.yaml が置かれているディレクトリ。
+    directory: "/"
+    # 日本時間で毎週月曜日の06:00に更新チェックを実行する。
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Asia/Tokyo"
+    # リリースから 7 日間は更新 PR を保留する。
+    cooldown:
+      default-days: 7

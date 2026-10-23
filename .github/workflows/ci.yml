@@ -1,0 +1,41 @@
+# GitHub Actionsのワークフローファイル。
+#
+# このファイルは、GitHubリポジトリ内で特定のイベント（例: プルリクエストやコードのプッシュ）
+# が発生したときに自動的に実行される一連のジョブとステップを定義します。
+#
+# ドキュメント: https://docs.github.com/ja/actions/using-workflows/workflow-syntax-for-github-actions
+
+name: CI
+
+on:
+  # 全プルリクエストで必ず実行
+  # mainブランチへのpush時にも実行
+  pull_request:
+  push:
+    branches:
+      - main
+
+# 最小権限原則。リポジトリへの書き込みを禁止する。
+permissions:
+  contents: read
+
+jobs:
+  # pre-commitを実行するジョブ
+  pre-commit:
+    name: pre-commit (lint + gitleaks)
+    # GitHub Actionsのホスト環境としてUbuntuの最新バージョンを指定
+    runs-on: ubuntu-latest
+    # ジョブ全体のタイムアウトを10分に設定
+    timeout-minutes: 10
+    steps:
+      # ソースコードをGitHub Actionsのホスト環境にダウンロードする
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10  # v6
+        with:
+          # 最新とその1個前のコミットを取得する。これにより、pre-commitが変更点を正しく検出できるようになる。
+          fetch-depth: 2
+          # 以降のステップでGitの認証情報を使用しないようにする（認証情報漏洩防止）
+          persist-credentials: false
+      # Python環境をセットアップする
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405  # v6
+      # pre-commitフックを実行する
+      - uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd  # v3.0.1

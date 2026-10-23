@@ -1,0 +1,77 @@
+# pre-commit の設定ファイル
+# コミット時・コミットメッセージ作成時に自動で各種チェック（フック）を実行する。
+# 公式ドキュメント: https://pre-commit.com/
+#
+# 初回セットアップ(DevContainer では postCreateCommand で自動実行される):
+#   pre-commit install
+#
+# 全ファイルへ手動適用:
+#   pre-commit run --all-files
+#
+# フックの rev を最新へ更新:
+#   pre-commit autoupdate
+
+# `pre-commit install` 実行時に既定でインストールするフックの種類。
+default_install_hook_types:
+    # コミット直前にコード内容をチェックするフック
+    - pre-commit
+    # コミットメッセージの内容をチェックするフック
+    - commit-msg
+
+repos:
+# --- 汎用的な基本チェック ---
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+    -   id: trailing-whitespace   # 行末の余分な空白を自動削除する
+    -   id: end-of-file-fixer     # ファイル末尾を改行1つで終わるよう整形する
+    -   id: detect-private-key    # 秘密鍵の誤コミットを検出して防止する
+
+# --- Python 用リンター/フォーマッター（Ruff） ---
+-   repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.2
+    hooks:
+    -   id: ruff-check            # Lint チェック（コードの問題を検出）
+        args: [--fix]             # 自動修正可能な問題はその場で修正する
+    -   id: ruff-format           # コードフォーマット（整形）を行う
+
+# --- Python 型チェッカー（Pyright） ---
+-   repo: https://github.com/RobertCraigie/pyright-python
+    rev: v1.1.414
+    hooks:
+    -   id: pyright              # 静的型チェックを行い、型エラーを検出する
+
+# --- Markdown 用リンター（markdownlint-cli2） ---
+# Markdown が壊れて表示される文法違反のみを検出する。
+# 検出ルールは `.markdownlint-cli2.jsonc` で定義し、VS Code 拡張と共通化している。
+-   repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.24.0
+    hooks:
+    -   id: markdownlint-cli2
+
+# --- 機密情報スキャン（Gitleaks） ---
+# API キーやパスワードなどのシークレットがコミットに含まれていないか検査する。
+-   repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.0
+    hooks:
+    -   id: gitleaks
+
+# --- コミットメッセージ規約チェック（Conventional Commits） ---
+# 「feat: ...」「fix: ...」などの Conventional Commits 形式に
+# 従っているかをコミットメッセージ作成時に検証する。
+-   repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v4.4.0
+    hooks:
+    -   id: conventional-pre-commit
+        stages: [commit-msg]
+        args: []
+
+# --- ローカル定義のカスタムフック ---
+# コミットメッセージに日本語が含まれているかをチェックする。
+-   repo: local
+    hooks:
+    -   id: check-japanese-commit
+        name: Check Japanese commit message
+        entry: uv run python scripts/japanese_commit_message.py
+        language: unsupported
+        stages: [commit-msg]

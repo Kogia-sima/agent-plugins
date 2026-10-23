@@ -1,0 +1,124 @@
+{
+  "name": "agent-skills",
+  // Python 3.12 をベースにした公式 Dev Container イメージを使用
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
+	"containerEnv": {
+    // コンテナ内でGUIアプリを動かすための環境変数
+		"DISPLAY": "${localEnv:DISPLAY}",
+    // Claude Codeの設定ディレクトリを指定
+		"CLAUDE_CONFIG_DIR": "/home/vscode/.claude",
+    // タイムゾーンを日本時間に設定
+    "TZ": "Asia/Tokyo"
+	},
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1": {},
+    "ghcr.io/devcontainers-extra/features/pre-commit:2": {}
+  },
+  // コンテナ作成前にホスト側で実行するコマンド
+  // bind マウント先 (~/.claude, ~/.codex) がホストに存在しないと、
+  // Open Container 時にマウントエラーになるため、ここで事前に作成しておく。
+  // ホストの既定シェルは OS により異なる (Windows: cmd / macOS・Linux: sh) ため、
+  // シェル構文やパス区切りの差を吸収できるよう Node.js のワンライナーで作成する。
+  // mounts と同じ HOME を参照し (process.env.HOME)、未設定時のみ os.homedir() にフォールバックする。
+  "initializeCommand": "node -e \"const fs=require('fs'),path=require('path'),home=process.env.HOME||require('os').homedir();for(const d of ['.claude','.codex'])fs.mkdirSync(path.join(home,d),{recursive:true});\"",
+  // コンテナ作成後に実行するコマンド (コンテナ内で実行される)
+  "postCreateCommand": "bash .devcontainer/post-create.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "charliermarsh.ruff",
+        "github.vscode-github-actions",
+        "github.vscode-pull-request-github",
+        "mhutchie.git-graph",
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "Anthropic.claude-code",
+        "redhat.vscode-yaml",
+        "DavidAnson.vscode-markdownlint",
+        "sohamkamani.code-eol",
+        "tamasfe.even-better-toml",
+        "yzhang.markdown-all-in-one"
+      ],
+      "settings": {
+        // Wayland ソケットのマウントを無効化 (マウント関連のエラー回避のため)
+        "dev.containers.mountWaylandSocket": false,
+        // ファイルの改行コードを LF に統一
+        "files.eol": "\n",
+        // ファイルの末尾に改行を挿入
+        "files.insertFinalNewline": true,
+        // ファイルの末尾の改行を削除
+        "files.trimFinalNewlines": true,
+        // pythonのパスを指定
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        // Pythonの型チェックモードを設定
+        "python.analysis.typeCheckingMode": "standard",
+        "[python]": {
+          // PythonファイルのフォーマッタをRuffに設定
+          "editor.defaultFormatter": "charliermarsh.ruff",
+          // 保存時に自動でコードをフォーマット
+          "editor.formatOnSave": true,
+          // 保存時にRuffのfixAllとorganizeImportsを実行
+          "editor.codeActionsOnSave": {
+            "source.fixAll.ruff": "explicit",
+            "source.organizeImports.ruff": "explicit"
+          }
+        },
+        "[markdown]": {
+          // Markdownファイルの自動折り返しを有効化
+          "editor.wordWrap": "on",
+          // Markdownファイルのタブサイズを2スペースに設定
+          "editor.tabSize": 2,
+          // Markdownファイルのフォーマッタをmarkdownlintに設定
+          "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+        },
+        "[yaml]": {
+          // YAMLファイルのフォーマッタを設定
+          "editor.defaultFormatter": "redhat.vscode-yaml"
+        },
+        "[github-actions-workflow]": {
+          // GitHub Actionsワークフローファイルのフォーマッタを設定
+          "editor.defaultFormatter": "redhat.vscode-yaml"
+        },
+        // GitHub Copilotの次の編集提案を有効化
+        "github.copilot.nextEditSuggestions.enabled": true,
+        // GitHub Copilotの補完機能を有効にするファイルタイプを指定
+        "github.copilot.enable": {
+          "*": true,
+          "yaml": true,
+          "toml": true,
+          "json": true,
+          "markdown": true,
+          "python": true,
+          "plaintext": false
+        },
+        // GitHub Copilot Chatのコミットメッセージ生成の指示を設定
+        "github.copilot.chat.commitMessageGeneration.instructions": [
+          { "text": "Use conventional commit format." },
+          { "text": "Use imperative mood: 'Add feature' not 'Added feature'." },
+          { "text": "Use types: feat, fix, docs, style, refactor, perf, test, chore, ci." },
+          { "text": "Include scope when relevant (e.g., api, ui, auth)." },
+          { "text": "For additional details, use a well-structured body section." },
+          { "text": "Use bullet points (*) for clarity." },
+          { "text": "Write overall message in Japanese." }
+        ],
+        // Claude Code起動時の環境変数を設定
+        "claudeCode.environmentVariables": [],
+        // Claude Codeで使用するモデルを設定
+        "claudeCode.selectedModel": "default"
+      }
+    }
+  },
+  // コンテナ内で使用するユーザー名を指定
+  "remoteUser": "vscode",
+  "containerUser": "vscode",
+  // ホストの特定ディレクトリをコンテナ内にマウント
+  // Windows環境では、事前にHOME環境変数が正しく設定されている必要があることに注意
+  "mounts": [
+    "source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind",
+    "source=${localEnv:HOME}/.codex,target=/home/vscode/.codex,type=bind"
+  ]
+}

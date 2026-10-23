@@ -1,0 +1,44 @@
+// markdownlint-cli2 の設定ファイル。
+//
+// 【方針】
+// スタイル（空行・インデント・行長など）は強制せず、「Markdown として壊れて表示される文法違反」
+// だけを最小限検出する（スキル開発のハードルを上げないため）。
+//
+// ルールの一覧と意味: https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+{
+  // エディタの入力補完用 JSON Schema。
+  "$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint-cli2/main/schema/markdownlint-cli2-config-schema.json",
+
+  // markdownlint 本体のルール設定。
+  "config": {
+    // まず全ルールを無効にし、以下で「文法違反」に該当するものだけを個別に有効化する。
+    "default": false,
+
+    // MD011: リンク記法の括弧が逆（`(text)[url]`）。リンクとして機能しない。
+    "MD011": true,
+
+    // MD018: 見出しの `#` と本文の間にスペースがない（`#見出し`）。見出しとして認識されない。
+    "MD018": true,
+
+    // MD037: 強調記号の内側に余分なスペース（`** 太字 **`）。強調が効かない。
+    "MD037": true,
+
+    // MD038: コードスパン記号の内側に余分なスペース（`` ` code ` ``）。意図通り表示されない。
+    "MD038": true,
+
+    // MD039: リンクテキストの前後に余分なスペース（`[ text ](url)`）。
+    "MD039": true,
+
+    // MD042: リンク先が空（`[text]()`）。リンクとして機能しない。
+    "MD042": true,
+
+    // MD052: 参照リンク／画像の参照先が未定義（`[text][undefined]`）。リンク切れになる。
+    "MD052": true
+  },
+
+  // .gitignore で無視されるファイルは検査対象から除外する。
+  "gitignore": true,
+
+  // 上記に加えて検査対象から除外するパス。
+  "ignores": ["**/node_modules/**"]
+}
