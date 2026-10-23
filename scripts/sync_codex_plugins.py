@@ -34,6 +34,7 @@ MARKETPLACE_DISPLAY_NAME = "Agent Plugins"
 # プラグインごとの Codex 上のカテゴリ。ここに無いプラグインは DEFAULT_CATEGORY を使う
 CATEGORIES: dict[str, str] = {
     "commit": "Coding",
+    "python-testing": "Coding",
 }
 DEFAULT_CATEGORY = "Productivity"
 

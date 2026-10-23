@@ -62,3 +62,4 @@ enabled = true
 | [`tech-article-review`](./plugins/tech-article-review/) | ユーザーが書いた技術記事をレビューするスキル |
 | [`wbs-creator`](./plugins/wbs-creator/) | プロジェクトのゴールを入力すると、WBS（作業分解構造）を表形式で生成するスキル |
 | [`commit`](./plugins/commit/) | Conventional Commits 形式に沿ったコミットを作成するスキル |
+| [`python-testing`](./plugins/python-testing/) | Pythonコードのテストを実装・実行し、テスト結果を報告するスキル |

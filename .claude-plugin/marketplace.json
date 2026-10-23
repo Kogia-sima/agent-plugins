@@ -50,6 +50,11 @@
       "name": "commit",
       "source": "./plugins/commit",
       "description": "ALWAYS use this skill when committing code changes — never commit directly without it. Creates commits following proper conventional commit format and issue references. Trigger on any commit, git commit, save changes, or commit message task."
+    },
+    {
+      "name": "python-testing",
+      "source": "./plugins/python-testing",
+      "description": "Pythonコードのテストを実装・実行し、テスト結果を報告するまでの一連の手順を提供する"
     }
   ]
 }

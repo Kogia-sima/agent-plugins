@@ -1,0 +1,16 @@
+{
+  "name": "python-testing",
+  "version": "0.1.0",
+  "description": "Pythonコードのテストを実装・実行し、テスト結果を報告するまでの一連の手順を提供する",
+  "author": {
+    "name": "Ryohei Machida",
+    "email": "r-machida@analytics-jp.com"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "python-testing",
+    "shortDescription": "Pythonコードのテストを実装・実行し、テスト結果を報告するまでの一連の手順を提供する",
+    "category": "Coding",
+    "developerName": "Ryohei Machida"
+  }
+}
