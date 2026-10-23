@@ -40,6 +40,9 @@ repos:
     rev: v1.1.414
     hooks:
     -   id: pyright              # 静的型チェックを行い、型エラーを検出する
+        # Pyright はファイル名を明示的に渡されると pyproject.toml の exclude を無視するため、
+        # pre-commit 側でも同じパスを除外する
+        exclude: ^plugins/document-review/
 
 # --- Markdown 用リンター（markdownlint-cli2） ---
 # Markdown が壊れて表示される文法違反のみを検出する。

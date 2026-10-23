@@ -1,0 +1,30 @@
+# Python 開発ツール（Ruff / Pyright）の共通設定ファイル。
+# このリポジトリは Python パッケージではないため [project] テーブルは定義せず、
+# ツール設定の置き場所としてのみ使用する。
+
+# --- Ruff（リンター/フォーマッター）の設定 ---
+# 公式ドキュメント: https://docs.astral.sh/ruff/configuration/
+[tool.ruff]
+# DevContainer の Python バージョン（3.12）に合わせる
+target-version = "py312"
+# 検査対象から除外するパス（既定の除外パスに追加する）
+extend-exclude = [
+    # document-review プラグイン同梱のスクリプトは検査対象外とする
+    "plugins/document-review",
+]
+# pre-commit はファイル名を明示的に渡すため、明示指定されたファイルにも除外設定を適用する
+force-exclude = true
+
+# --- Pyright（静的型チェッカー）の設定 ---
+# 公式ドキュメント: https://microsoft.github.io/pyright/#/configuration
+[tool.pyright]
+# DevContainer の Python バージョン（3.12）に合わせる
+pythonVersion = "3.12"
+# 検査対象から除外するパス
+# NOTE: exclude を指定すると既定の除外パスが上書きされるため、それらも併記する
+exclude = [
+    "**/node_modules",
+    "**/__pycache__",
+    "**/.*",
+    "plugins/document-review",
+]
