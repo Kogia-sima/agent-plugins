@@ -63,7 +63,7 @@ repos:
 # 「feat: ...」「fix: ...」などの Conventional Commits 形式に
 # 従っているかをコミットメッセージ作成時に検証する。
 -   repo: https://github.com/compilerla/conventional-pre-commit
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
     -   id: conventional-pre-commit
         stages: [commit-msg]
