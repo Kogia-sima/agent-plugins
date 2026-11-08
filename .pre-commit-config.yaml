@@ -29,7 +29,7 @@ repos:
 
 # --- Python 用リンター/フォーマッター（Ruff） ---
 -   repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.17.2
+    rev: v0.17.3
     hooks:
     -   id: ruff-check            # Lint チェック（コードの問題を検出）
         args: [--fix]             # 自動修正可能な問題はその場で修正する
