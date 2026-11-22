@@ -48,7 +48,7 @@ repos:
 # Markdown が壊れて表示される文法違反のみを検出する。
 # 検出ルールは `.markdownlint-cli2.jsonc` で定義し、VS Code 拡張と共通化している。
 -   repo: https://github.com/DavidAnson/markdownlint-cli2
-    rev: v0.24.0
+    rev: v0.24.1
     hooks:
     -   id: markdownlint-cli2
 
